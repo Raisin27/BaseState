@@ -11,14 +11,19 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 fun WellnessScreen(
     modifier: Modifier = Modifier,
     wellnessViewModel: WellnessViewModel = viewModel()){
+
     Column(modifier = modifier) {
         StatefulCounter()
 
 //        val list = remember { getWellnessTasks().toMutableStateList() }
         WellnessTaskList(
             list = wellnessViewModel.tasks,
-            onCloseTask = { task -> wellnessViewModel.remove(task)}
+            onCloseTask = { task ->
+                wellnessViewModel.remove(task)
+            },
+            onCheckedTask = { task, checked ->
+                wellnessViewModel.changeTaskChecked(task, checked)
+            }
         )
     }
-
 }
